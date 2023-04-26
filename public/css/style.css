@@ -1,0 +1,189 @@
+*{
+    margin: 0;
+    padding: 0;
+} 
+body{
+    background-color: #e8e8e8;
+}
+
+.logo{
+    font-family: system-ui;
+    font-size: 5rem;
+    color: #9796f0;
+    text-align: center;
+    letter-spacing: 5px;
+    text-shadow: 0 2px 1px #7676bd, -1px 3px 1px #56568a, -2px 5px 5px #7676bd;
+    margin-top: 5px;
+}
+
+.card {
+    width: 50rem;
+    height: 45rem;
+    border-radius: 30px;
+    background: #e0e0e0;
+    position: relative;
+    box-shadow: 15px 15px 30px #bebebe, -15px -15px 30px #ffffff;
+    top: 35px;
+}
+
+
+.center{
+    display: flex;
+    justify-content: center;
+}
+
+.message-box {
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+  }
+  
+  .message-box.left {
+    background-color: #f1f1f1;
+    color: black;
+    font-size: 16px;
+    font-family: system-ui;
+    width: fit-content;
+    float: left;
+    clear: both;
+    margin-bottom: 15px;
+  }
+  
+  .message-box.right {
+    background-color: #333;
+    color: #fff;
+    font-size: 16px;
+    right: 0;
+    font-family: system-ui;
+    width: fit-content;
+    float: right;
+    clear: both;
+    margin-bottom: 15px;
+  }
+
+  .messages-container {
+    padding: 15px;
+    height: 59vh;
+    overflow-y: auto;
+  }
+
+  /* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  .messages-container {
+    scrollbar-width: auto;
+    scrollbar-color: #9796f0 #e0e0e0;
+  }
+
+  /* Chrome, Edge, and Safari */
+  .messages-container::-webkit-scrollbar {
+    display: none;
+    width: 16px;
+  }
+
+  .messages-container::-webkit-scrollbar-track {
+    background: none;
+  }
+
+  .messages-container::-webkit-scrollbar-thumb {
+    background-color: #9796f0;
+    border-radius: 10px;
+    border: 5px solid #e0e0e0;
+
+  }
+
+  .message{
+    position: relative;
+    clear: both;
+    text-align: center;
+    font-size: larger;
+    font-family: monospace;
+    padding: 5px;
+    color: #333;
+  }
+
+  .input {
+    border: none;
+    outline: none;
+    border-radius: 15px;
+    padding: 1em;
+    background-color: #333;
+    box-shadow: inset 2px 5px 10px rgba(0,0,0,0.3);
+    transition: 300ms ease-in-out;
+    position: fixed;
+    top: 81vh;
+    width: 56vh;
+    margin-left: 4vh;
+    color: white;
+    font-size: 16px;
+    font-family: system-ui;
+   }
+   
+   .input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: white;
+    opacity: 1; /* Firefox */
+  }
+
+  button {
+    font-size: 16px;
+    background-color: #9796f0;
+    color: white;
+    padding: 0.8em 1.2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s;
+    float: right;
+    clear: both;
+    position: fixed;
+    top: 81vh;
+    height: 5.5vh;
+    right: 62vh;
+    font-family: system-ui;
+  }
+  
+  button:hover {
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  button:active {
+    transform: scale(0.95);
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  button span {
+    display: block;
+    margin-left: 0.4em;
+    transition: all 0.3s;
+  }
+  
+  button svg {
+    width: 18px;
+    height: 18px;
+    fill: white;
+    transition: all 0.3s;
+  }
+  
+  button .svg-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin-right: 0.5em;
+    transition: all 0.3s;
+  }
+  
+  button:hover .svg-wrapper {
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+  
+  button:hover svg {
+    transform: rotate(45deg);
+  }
+  
+  
