@@ -2,12 +2,11 @@ const express = require("express")
 var expressHbs = require('express-handlebars');
 const router = require("./routes/index")
 const app = express()
-const path = require("path");
 const { createServer } = require("http");
 const { Server } = require("socket.io");
 const httpServer = createServer(app);
 const io = new Server(httpServer);
-
+const path = require("path");
 app.use(express.json())
 app.set('view engine', '.hbs');
 app.use(express.static(path.join(__dirname, '/public')));
