@@ -1,5 +1,6 @@
 const express = require("express")
-var expressHbs = require('express-handlebars');
+// var expressHbs = require('express-handlebars');
+const hbs = require('hbs')
 const router = require("./routes/index")
 const app = express()
 const { createServer } = require("http");
@@ -13,7 +14,7 @@ app.set('view engine', '.hbs');
 app.use(express.static(__dirname + '/public'));
 app.use(express.json());
 
-app.engine('.hbs', expressHbs.engine({ extname: '.hbs', defaultLayout: "main"}));
+// app.engine('.hbs', expressHbs.engine({ extname: '.hbs', defaultLayout: "main"}));
 
 
 app.use('/', router)
