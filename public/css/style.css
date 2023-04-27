@@ -186,4 +186,84 @@ body{
     transform: rotate(45deg);
   }
   
+
+/* .live-box{
+  position: absolute;
+  right: 15vh;
+  top: 15vh;
+  width: 190px;
+  height: fit-content;
+  border-radius: 30px;
+  background: #e0e0e0;
+  box-shadow: 15px 15px 30px #bebebe, -15px -15px 30px #ffffff;
+}
+
+.clive{
+  text-align: center;
+  background-color: #333;
+  color: white;
+  border-radius: 20px 20px 0px 0px;
+  padding: 10px;
+  font-family: monospace;
+  font-size: larger;
+}
+
+.live{
+  
+} */
+
+@media screen and (max-width: 600px){
+  .logo{
+    font-size: 55px;
+    /* line-height: normal; */
+  }
+  .card {
+    height: 87vh;
+    margin-top: -2vh;
+    border-radius: 0px;
+    width: -webkit-fill-available;
+}
+.input {
+  background: none;
+  box-shadow: none;
+  border-bottom: 2px solid #333;
+  border-radius: 0;
+  color: #333;
+  height: auto;
+  width: 37vh;
+  position: absolute;
+  top: 36rem;
+  left: -10px;
+  padding-bottom: 10px;
+ }
+ .input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #333;
+  opacity: 1; /* Firefox */
+}
+button{
+  position: absolute;
+  border-radius: 25px;
+  width: 0px;
+  top: 79.5vh;
+  right: 2vh;
+}
+button span{
+  display: none;
+}
+.svg-wrapper-1{
+  width: 30px;
+}
+.message{
+  margin-bottom: 10px;
+}
+.message-box.left {
+  margin-bottom: 10px;
+}
+.message-box.right {
+  margin-bottom: 10px;
+}
+.messages-container{
+  height: 74vh;
+}
+}
   
