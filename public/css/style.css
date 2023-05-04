@@ -111,7 +111,7 @@ body{
   transition: 300ms ease-in-out;
   position: fixed;
   top: 81vh;
-  width: 56vh;
+  width: 36rem;
   margin-left: 4vh;
   color: white;
   font-size: 16px;
@@ -139,7 +139,7 @@ button {
   clear: both;
   position: fixed;
   top: 81vh;
-  height: 2.5rem;
+  height: 3.2rem;
   right: 62vh;
   font-family: system-ui;
 }
@@ -253,6 +253,7 @@ border-radius: 25px;
 width: 0px;
 top: 36.5rem;
 right: 1rem;
+height: 2.5rem;
 }
 button span{
 display: none;
