@@ -3,7 +3,7 @@ const app = express();
 const connectDB =  require("../db")
 
 const home = async (req, res) =>{
-    res.render('home')
+    res.render('index')
 }
 
 module.exports = {

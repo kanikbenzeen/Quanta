@@ -49,3 +49,8 @@ socket.on('receive', data =>{
 socket.on('leave', name =>{
     appendNotification(`${name} left the chat`)
     })
+
+
+// new code
+const el = document.getElementById('messages')
+el.scrollTop = el.scrollHeight
