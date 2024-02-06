@@ -20,19 +20,16 @@ router.get('/admin', (req,res) =>{
     indexController.admin(req,res)
 })
 
-router.get('/admin-login', (req,res) =>{
+router.get('/login-admin', (req,res) =>{
     indexController.adminLogin(req,res)
 })
 
-router.post('/register-form-post', (req,res) =>{
-    indexController.registerFormPost(req,res)
-})
-router.post('/login-form-post', (req,res) =>{
-    indexController.loginFormPost(req,res)
+router.get('/error', (req,res) =>{
+    indexController.error(req,res)
 })
 
-router.post('/admin-form-post', (req,res) =>{
-    indexController.adminFormPost(req,res)
-})
+router.get('*', function (req, res) {
+    indexController.notFound(req, res);
+});
 
 module.exports  = router

@@ -1,7 +1,8 @@
 const express = require("express")
 var expressHbs = require('express-handlebars');
 const hbs = require('hbs')
-const router = require("./routes/index")
+const index = require("./routes/index")
+const forms = require("./routes/forms")
 const app = express()
 const { createServer } = require("http");
 const { Server } = require("socket.io");
@@ -27,7 +28,10 @@ app.use(session({
     saveUninitialized: false,
   }))
 app.engine('.hbs', expressHbs.engine({ extname: '.hbs', defaultLayout: "main"}));
-app.use('/', router)
+
+
+app.use('/', index)
+app.use('/form', forms)
 
 
 const users = {};
