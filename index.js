@@ -13,6 +13,8 @@ app.set('view engine', '.hbs');
 // app.use(express.static(path.join(__dirname, '/public')));
 app.use(express.static(__dirname + '/public'));
 app.use(express.json());
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.engine('.hbs', expressHbs.engine({ extname: '.hbs', defaultLayout: "main"}));
 
