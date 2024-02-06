@@ -1,9 +1,10 @@
 const express = require('express');
 const User = require('../models/createUser');
-
+const bcrypt = require('bcryptjs')
 
 
 const home = async (req, res) =>{
+      console.log(req.session.user_id);
     res.render('index')
 }
 
@@ -18,7 +19,6 @@ const login = async (req, res) =>{
 
 const registerFormPost = async (req, res) =>{
     const { username, email, password } = req.body;
-    console.log(req.body)
 
     try {
         // Check if the user already exists
@@ -38,9 +38,11 @@ const registerFormPost = async (req, res) =>{
         });
         
         await newUser.save();
-        console.log(newUser);
-        req.session.user_id = newUser._id;
-        res.redirect('/login');
+        // console.log(newUser);
+        // req.session.user_id = newUser._id;
+        // console.log(req.session.user_id);
+        // req.session.save()
+        res.redirect('/login-user');
     } catch (error) {
         console.error(error.message);
         res.status(500).json({ message: "Internal erver error" });
@@ -67,6 +69,7 @@ const loginFormPost = async (req, res) =>{
 
         // Passwords match, login successful
         req.session.user_id = user._id;
+        req.session.save(); // Save the session immediately
         res.redirect('/chat');
         
     } catch (error) {

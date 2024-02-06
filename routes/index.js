@@ -1,8 +1,10 @@
 const express = require("express")
 const indexController = require("../controllers/index.controller")
 const router = express.Router()
+const isLoggedIn =  require('../middleware/auth')
 
-router.get('/', (req,res) =>{
+
+router.get('/', isLoggedIn,(req,res) =>{
     indexController.home(req,res)
 })
 
