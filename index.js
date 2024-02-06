@@ -10,15 +10,17 @@ const io = new Server(httpServer);
 // const path = require("path");
 app.use(express.json())
 app.set('view engine', '.hbs');
-// app.use(express.static(path.join(__dirname, '/public')));
+const connectDB = require('./db')
 app.use(express.static(__dirname + '/public'));
 app.use(express.json());
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
+// database connection functions
+connectDB()
+
 app.engine('.hbs', expressHbs.engine({ extname: '.hbs', defaultLayout: "main"}));
-
-
 app.use('/', router)
 
 
