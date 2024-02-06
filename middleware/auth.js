@@ -30,4 +30,31 @@ const isLoggedIn = async (req, res, next) => {
 };
 
 
-module.exports = isLoggedIn
+// isAdmin middleware
+const isAdmin = (req, res, next) => {
+    // Check if user is authenticated and has "admin" role
+    if (req.session.user_id) {
+        User.findById(req.session.user_id)
+            .then(user => {
+                if (!user || !user.role === 'admin') {
+                    // If user has "admin" role, redirect to admin page
+                    res.redirect('/login-admin');
+                } else {
+                    // If user is not admin, continue to the next middleware or route handler
+                    next();
+                }
+            })
+            .catch(error => {
+                console.error('Error checking user role:', error);
+                res.status(500).json({ message: 'Server error' });
+            });
+    } else {
+        // If user is not authenticated, redirect to login page
+        res.redirect('/login-admin');
+    }
+};
+
+
+
+
+module.exports = {isLoggedIn, isAdmin}

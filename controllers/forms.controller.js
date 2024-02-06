@@ -63,16 +63,38 @@ const loginFormPost = async (req, res) =>{
     }
 }
 
-const adminFormPost = async (req, res) =>{
+const adminFormPost = async (req, res) => {
     const { username, email, password } = req.body;
     try {
-        if (email == 'kaniksaini@gmail.com' && password == 'noaccess') {
+        // Check the role of the user
+        const user = await User.findOne({ $or: [{ username: username }, { email: email }] });
+
+        if (!user) {
+            return res.redirect('/error?message=Invalid%20email');
+        }
+
+        // Compare the provided password with the hashed password stored in the database
+        const isPasswordMatch = await bcrypt.compare(password, user.password);
+
+        if (!isPasswordMatch) {
+            return res.redirect('/error?message=Invalid%20password');
+        }
+
+        if (user && user.role === 'admin') {
+            // If user is admin, redirect to admin page
+            req.session.user_id = user._id;
+            req.session.save(); // Save the session immediately
             res.redirect('/admin');
+        } else {
+            // If user is not admin, redirect to login-admin page
+            res.redirect('/login-admin');
         }
     } catch (error) {
-        res.status(500).json({ message: "Invalid Credentials" });
+        // Handle errors
+        console.error('Error processing admin form:', error);
+        res.status(500).json({ message: 'Internal server error' });
     }
-}
+};
 
 module.exports = {
     registerFormPost,

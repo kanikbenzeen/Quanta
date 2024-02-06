@@ -1,7 +1,7 @@
 const express = require("express")
 const indexController = require("../controllers/index.controller")
 const router = express.Router()
-const isLoggedIn =  require('../middleware/auth')
+const {isLoggedIn, isAdmin} =  require('../middleware/auth')
 
 
 router.get('/', isLoggedIn,(req,res) =>{
@@ -16,7 +16,7 @@ router.get('/login-user', (req,res) =>{
     indexController.login(req,res)
 })
 
-router.get('/admin', (req,res) =>{
+router.get('/admin',isAdmin, (req,res) =>{
     indexController.admin(req,res)
 })
 
