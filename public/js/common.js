@@ -4,6 +4,10 @@ const messageInput = document.getElementById('messageInp');
 const messageContainer = document.querySelector(".messages-container");
 // const live = document.querySelector(".live-box");
 
+function goBack() {
+  window.history.back();
+}
+
 const appendNotification = (message) =>{
     const messageElement = document.createElement('div')
     messageElement.innerText = message
