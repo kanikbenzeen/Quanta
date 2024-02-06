@@ -4,7 +4,6 @@ const bcrypt = require('bcryptjs')
 
 
 const home = async (req, res) =>{
-      console.log(req.session.user_id);
     res.render('index')
 }
 
@@ -15,6 +14,14 @@ const register = async (req, res) =>{
 
 const login = async (req, res) =>{
     res.render('register-user')
+}
+
+const admin = async (req, res) =>{
+    res.render('admin-pannel')
+}
+
+const adminLogin = async (req, res) =>{
+    res.render('admin-login')
 }
 
 const registerFormPost = async (req, res) =>{
@@ -78,11 +85,25 @@ const loginFormPost = async (req, res) =>{
     }
 }
 
+const adminFormPost = async (req, res) =>{
+    const { username, email, password } = req.body;
+    try {
+        if (email == 'kaniksaini@gmail.com' && password == 'noaccess') {
+            res.redirect('/chat');
+        }
+    } catch (error) {
+        res.status(500).json({ message: "Invalid Credentials" });
+    }
+}
+
 module.exports = {
     home,
     register,
     login,
+    admin,
+    adminLogin,
     registerFormPost,
-    loginFormPost
+    loginFormPost,
+    adminFormPost
 }
 
