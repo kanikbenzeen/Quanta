@@ -49,3 +49,28 @@ socket.on('receive', data =>{
 socket.on('leave', name =>{
     appendNotification(`${name} left the chat`)
     })
+
+document.addEventListener("DOMContentLoaded", function () {
+  // Check if the browser supports notifications
+  if ("Notification" in window) {
+    // Request permission to display notifications
+    Notification.requestPermission().then(function (permission) {
+      if (permission === "granted") {
+        // Create a new notification
+        var notification = new Notification("Hello, world!", {
+          body: "This is a notification from your website.",
+          icon: "path/to/icon.png" // Optional
+        });
+
+        // Handle click event on notification
+        notification.onclick = function () {
+          // Code to execute when notification is clicked
+          window.focus(); // Bring focus to the window
+          notification.close(); // Close the notification
+        };
+      }
+    });
+  } else {
+    console.error("This browser does not support notifications.");
+  }
+});
