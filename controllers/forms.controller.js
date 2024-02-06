@@ -42,14 +42,14 @@ const loginFormPost = async (req, res) =>{
         const user = await User.findOne({ $or: [{ username: username }, { email: email }] });
         
         if (!user) {
-            return res.status(400).json({ message: "Invalid username/email or password" });
+            return res.redirect('/error?message=Invalid%20email');
         }
 
         // Compare the provided password with the hashed password stored in the database
         const isPasswordMatch = await bcrypt.compare(password, user.password);
 
         if (!isPasswordMatch) {
-            return res.status(400).json({ message: "Invalid username/email or password" });
+            return res.redirect('/error?message=Invalid%20password');
         }
 
         // Passwords match, login successful

@@ -6,12 +6,11 @@ const home = async (req, res) =>{
 }
 
 const register = async (req, res) =>{
-    
     res.render('register-user')
 }
 
 const login = async (req, res) =>{
-    res.render('register-user')
+    res.render('login-user')
 }
 
 const admin = async (req, res) =>{
@@ -23,7 +22,8 @@ const adminLogin = async (req, res) =>{
 }
 
 const error = async (req, res) =>{
-    res.render('error')
+    const errorMessage = req.query.message || 'An error occurred';
+    res.render('error', { message: errorMessage });
 }
 
 const notFound = async (req, res) =>{
