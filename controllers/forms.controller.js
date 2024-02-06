@@ -55,7 +55,7 @@ const loginFormPost = async (req, res) =>{
         // Passwords match, login successful
         req.session.user_id = user._id;
         req.session.save(); // Save the session immediately
-        res.redirect('/');
+        res.redirect('/user');
         
     } catch (error) {
         console.error(error.message);

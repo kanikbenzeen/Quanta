@@ -16,6 +16,10 @@ router.get('/login-user', (req,res) =>{
     indexController.login(req,res)
 })
 
+router.get('/user', (req,res) =>{
+    indexController.user(req,res)
+})
+
 router.get('/admin',isAdmin, (req,res) =>{
     indexController.admin(req,res)
 })

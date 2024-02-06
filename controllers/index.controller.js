@@ -13,6 +13,10 @@ const login = async (req, res) =>{
     res.render('login-user')
 }
 
+const user = async (req, res) =>{
+    res.render('user-pannel')
+}
+
 const admin = async (req, res) =>{
     res.render('admin-pannel')
 }
@@ -35,6 +39,7 @@ module.exports = {
     home,
     register,
     login,
+    user,
     admin,
     adminLogin,
     error,
