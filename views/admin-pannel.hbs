@@ -10,25 +10,27 @@
             <span class="font-bold">Active Conversations</span>
             <span
               class="flex items-center justify-center bg-gray-300 h-4 w-4 rounded-full"
-              >4</span
+              >{{users.length}}</span
             >
           </div>
           <div class="flex flex-col space-y-1 mt-4 -mx-2 h-48">
+            {{#each users}}
             <button
               class="flex flex-row items-center hover:bg-gray-100 rounded-xl p-2"
             >
               <div
                 class="flex items-center justify-center h-8 w-8 bg-gray-200 rounded-full"
               >
-                M
+                {{trim this.username}}
               </div>
-              <div class="ml-2 text-sm font-semibold">Marta Curtis</div>
+              <div class="capitalize ml-2 text-sm font-semibold">{{this.username}}</div>
               <div
                 class="flex items-center justify-center ml-auto text-xs text-white bg-red-500 h-4 w-4 rounded leading-none"
               >
                 2
               </div>
             </button>
+            {{/each}}
           </div>
         </div>
       </div>

@@ -4,7 +4,7 @@ const router = express.Router()
 const {isLoggedIn, isAdmin} =  require('../middleware/auth')
 
 
-router.get('/', isLoggedIn,(req,res) =>{
+router.get('/',(req,res) =>{
     indexController.home(req,res)
 })
 

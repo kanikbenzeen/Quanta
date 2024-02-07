@@ -9,7 +9,7 @@ const registerFormPost = async (req, res) =>{
         // Check if the user already exists
         const existingUser = await User.findOne({ $or: [{ username }, { email }] });
         if (existingUser) {
-            return res.status(400).json({ message: "User already exists" });
+            return res.redirect('/register-user?error=409');
         }
 
         // Hash the password
@@ -42,14 +42,14 @@ const loginFormPost = async (req, res) =>{
         const user = await User.findOne({ $or: [{ username: username }, { email: email }] });
         
         if (!user) {
-            return res.redirect('/error?message=Invalid%20email');
+            return res.redirect('/login-user?error=501');
         }
 
         // Compare the provided password with the hashed password stored in the database
         const isPasswordMatch = await bcrypt.compare(password, user.password);
 
         if (!isPasswordMatch) {
-            return res.redirect('/error?message=Invalid%20password');
+            return res.redirect('/login-user?error=401');
         }
 
         // Passwords match, login successful
@@ -70,14 +70,14 @@ const adminFormPost = async (req, res) => {
         const user = await User.findOne({ $or: [{ username: username }, { email: email }] });
 
         if (!user) {
-            return res.redirect('/error?message=Invalid%20email');
+            return res.redirect('/login-admin?error=501');
         }
 
         // Compare the provided password with the hashed password stored in the database
         const isPasswordMatch = await bcrypt.compare(password, user.password);
 
         if (!isPasswordMatch) {
-            return res.redirect('/error?message=Invalid%20password');
+            return res.redirect('/login-admin?error=401');
         }
 
         if (user && user.role === 'admin') {

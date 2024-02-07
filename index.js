@@ -27,7 +27,42 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
   }))
-app.engine('.hbs', expressHbs.engine({ extname: '.hbs', defaultLayout: "main"}));
+
+  app.engine('.hbs', expressHbs.engine({ extname: '.hbs', defaultLayout: "main", helpers:{
+    json: function (context) { return JSON.stringify(context); },
+    xIf: function(v1, operator, v2, options) {
+        switch (operator) {
+            case '==':
+                return (v1 == v2) ? options.fn(this) : options.inverse(this);
+            case '===':
+                return (v1 === v2) ? options.fn(this) : options.inverse(this);
+            case '!==':
+                return (v1 !== v2) ? options.fn(this) : options.inverse(this);
+            case '!=':
+                return (v1 != v2) ? options.fn(this) : options.inverse(this);
+            case '<':
+                return (v1 < v2) ? options.fn(this) : options.inverse(this);
+            case '<=':
+                return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+            case '>':
+                return (v1 > v2) ? options.fn(this) : options.inverse(this);
+            case '>=':
+                return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+            case '&&':
+                return (v1 && v2) ? options.fn(this) : options.inverse(this);
+            case '||':
+                return (v1 || v2) ? options.fn(this) : options.inverse(this);
+            default:
+                return options.inverse(this);
+        }
+    },
+    trim: function(value, options) {
+        return value.split(" ")
+        .map(word => word[0].toUpperCase())
+        .join("");
+        // return m.format(formatToUse);
+    },
+}}));
 
 
 app.use('/', index)

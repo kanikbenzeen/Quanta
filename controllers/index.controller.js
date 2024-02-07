@@ -1,4 +1,5 @@
 const express = require('express');
+const Users = require( '../models/createUser' );
 
 
 const home = async (req, res) =>{
@@ -6,11 +7,13 @@ const home = async (req, res) =>{
 }
 
 const register = async (req, res) =>{
-    res.render('register-user')
+    const error = req.query.error
+    res.render('register-user',{error})
 }
 
 const login = async (req, res) =>{
-    res.render('login-user')
+    const error = req.query.error
+    res.render('login-user',{error})
 }
 
 const user = async (req, res) =>{
@@ -18,11 +21,14 @@ const user = async (req, res) =>{
 }
 
 const admin = async (req, res) =>{
-    res.render('admin-pannel')
+    const users = await Users.find({}).lean().select(["username", "email", "_id", "role"])
+    console.log(req.session);
+    res.render('admin-pannel', {users: users}) 
 }
 
 const adminLogin = async (req, res) =>{
-    res.render('admin-login')
+    const error = req.query.error
+    res.render('admin-login',{error})
 }
 
 const error = async (req, res) =>{
