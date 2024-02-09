@@ -40,19 +40,7 @@ form.addEventListener('submit', (e) =>{
 
 const name = prompt("Enter Your Name To Join");
 
-socket.emit('new-user-joined', name)
 
-socket.on('user-joined', name =>{
-    appendNotification(`${name} joined the chat`)
-})
-
-socket.on('receive', data =>{
-    append(`${data.name}: ${data.message}`, 'left')
-    })
-
-socket.on('leave', name =>{
-    appendNotification(`${name} left the chat`)
-    })
 
 document.addEventListener("DOMContentLoaded", function () {
   // Check if the browser supports notifications
@@ -78,3 +66,70 @@ document.addEventListener("DOMContentLoaded", function () {
     console.error("This browser does not support notifications.");
   }
 });
+
+var selectedUser = null; // Initialize selectedUser with a default value
+var currentUser = null; // Initialize currentUser with a default value
+
+// Function to handle user selection
+function selectUser(selectedUserId, currentUserId) {
+  // Save the selected user ID and current user ID
+  selectedUser = selectedUserId;
+  currentUser = currentUserId;
+
+  // Emit a request to fetch messages between the current user and the selected user
+  socket.emit('fetchMessages', { sender: currentUser, recipient: selectedUser });
+
+  // Listen for messages received from the server
+  socket.on('messagesReceived', messages => {
+      // Handle the received messages
+      console.log('Received messages:', messages);
+      // Perform any actions needed with the received messages
+  });
+
+  // Perform any other actions needed when a user is selected
+  // For example, you might display the selected user's chat history
+}
+
+
+// Function to send a message
+function sendMessage() {
+    // Get the message from the input field
+    const message = document.getElementById('getdata').value;
+
+    // Check if currentUser and selectedUser are defined
+    if (currentUser && selectedUser) {
+        // Emit the message to the server, along with sender and recipient information
+        socket.emit('send', {
+            sender: currentUser,
+            recipient: selectedUser,
+            content: message
+        });
+        selectedUser = null
+        currentUser = null
+        
+        // Clear the input field after sending the message
+        document.getElementById('getdata').value = '';
+    } else {
+        console.error('currentUser or selectedUser is not defined');
+    }
+}
+
+
+
+// Socket events
+// socket.on('new-user-joined', name => {
+//   appendNotification(`${name} joined the chat`);
+// });
+
+// socket.on('user-joined', name => {
+//   appendNotification(`${name} joined the chat`);
+// });
+
+// socket.on('send', data => {
+//   // Display the received message
+//   append(`${data.name}: ${data.message}`, 'left');
+// });
+
+// socket.on('leave', name => {
+//   appendNotification(`${name} left the chat`);
+// });

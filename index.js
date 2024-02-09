@@ -1,15 +1,15 @@
 const express = require("express")
 var expressHbs = require('express-handlebars');
-const hbs = require('hbs')
 const index = require("./routes/index")
 const forms = require("./routes/forms")
+
 const app = express()
 const { createServer } = require("http");
 const { Server } = require("socket.io");
 const httpServer = createServer(app);
 const io = new Server(httpServer);
 const session = require('express-session')
-// const path = require("path");
+const {socketController} = require('./controllers/message.controller')
 app.use(express.json())
 app.set('view engine', '.hbs');
 const connectDB = require('./db')
@@ -62,29 +62,19 @@ app.use(session({
         .join("");
         // return m.format(formatToUse);
     },
+
+    isSelectedUser: function(currentUserId, selectedUserId) {
+        // Compare the currentUserId with the selectedUserId
+        return currentUserId === selectedUserId;
+    }
 }}));
 
 
 app.use('/', index)
 app.use('/form', forms)
 
+socketController(io)
 
-const users = {};
-
-io.on('connection', socket =>{
-    socket.on('new-user-joined', name =>{
-        users[socket.id] = name;
-        socket.broadcast.emit('user-joined', name)
-    })
-
-    socket.on('send', message =>{
-        socket.broadcast.emit('receive',{message: message, name: users[socket.id]})
-    })
-    socket.on('disconnect', message =>{
-        socket.broadcast.emit('leave', users[socket.id])
-        delete users[socket.id]
-    })
-})
 
 
 httpServer.listen(3000, () =>{
