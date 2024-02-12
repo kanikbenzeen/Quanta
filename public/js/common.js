@@ -71,7 +71,7 @@ var selectedUser = null; // Initialize selectedUser with a default value
 var currentUser = null; // Initialize currentUser with a default value
 
 // Function to handle user selection
-function selectUser(selectedUserId, currentUserId) {
+function selectUser(selectedUserId, currentUserId, selectedUserName) {
   // Save the selected user ID and current user ID
   selectedUser = selectedUserId;
   currentUser = currentUserId;
@@ -81,14 +81,57 @@ function selectUser(selectedUserId, currentUserId) {
 
   // Listen for messages received from the server
   socket.on('messagesReceived', messages => {
-      // Handle the received messages
-      console.log('Received messages:', messages);
-      // Perform any actions needed with the received messages
+    // Handle the received messages
+    console.log('Received messages:', messages);
+
+    // Clear previous messages from the conversation area
+    const conversationDiv = document.querySelector('.flex.flex-col.h-full.overflow-x-auto.mb-4');
+    conversationDiv.innerHTML = '';
+
+    // Append the received messages to the HTML conversation
+    messages.forEach(message => {
+      // Create a div element for each message
+      const messageDiv = document.createElement('div');
+      messageDiv.classList.add('grid', 'grid-cols-12', 'gap-y-2');
+
+      // Check if the message was sent by the current user
+      if (message.sender === currentUser) {
+        // Create div elements for message content and sender
+        const messageContentDiv = document.createElement('div');
+        messageContentDiv.classList.add('col-start-6', 'col-end-13', 'p-3', 'rounded-lg');
+        messageContentDiv.innerHTML = `
+          <div class="flex items-center justify-start flex-row-reverse">
+            <div class="relative text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">${message.content}</div>
+          </div>`;
+        
+        // Append message content div to the message div
+        messageDiv.appendChild(messageContentDiv);
+      } else {
+        // Create div elements for message content and sender
+        const messageContentDiv = document.createElement('div');
+        messageContentDiv.classList.add('col-start-1', 'col-end-8', 'p-3', 'rounded-lg');
+        messageContentDiv.innerHTML = `
+          <div class="flex flex-row items-center">
+            <div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">${selectedUserName}</div>
+            <div class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">${message.content}</div>
+          </div>`;
+        
+        // Append message content div to the message div
+        messageDiv.appendChild(messageContentDiv);
+      }
+
+      // Append the message div to the conversation div
+      conversationDiv.appendChild(messageDiv);
+    });
   });
 
   // Perform any other actions needed when a user is selected
   // For example, you might display the selected user's chat history
 }
+
+
+
+
 
 
 // Function to send a message

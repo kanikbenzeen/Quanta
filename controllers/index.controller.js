@@ -22,8 +22,10 @@ const user = async (req, res) =>{
 
 const admin = async (req, res) =>{
     const users = await Users.find({}).lean().select(["username", "email", "_id", "role"])
-    console.log(users);
-    res.render('admin-pannel', {users: users,currentUser:req.session.user_id}) 
+    // console.log(users);
+    const currentUser = req.session.user_id
+    // console.log(currentUser);
+    res.render('admin-pannel', {users ,currentUser}) 
 }
 
 const adminLogin = async (req, res) =>{

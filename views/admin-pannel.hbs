@@ -10,12 +10,13 @@
             <span class="font-bold">Active Conversations</span>
             <span
               class="flex items-center justify-center bg-gray-300 h-4 w-4 rounded-full"
-              >{{users.length}}</span
+              >{{math users.length '-' 1}}</span
             >
           </div>
           <div class="flex flex-col space-y-1 mt-4 -mx-2 h-48">
             {{#each users}}
-            <button class="flex flex-row items-center hover:bg-gray-100 rounded-xl p-2" onclick="selectUser('{{this._id}}','{{../currentUser}}')">
+            {{#xIf ../currentUser '!=' this._id}}
+            <button class="flex flex-row items-center hover:bg-gray-100 rounded-xl p-2" onclick="selectUser('{{this._id}}','{{../currentUser}}','{{trim this.username}}')">
               <div class="flex items-center justify-center h-8 w-8 bg-gray-200 rounded-full">
                 {{trim this.username}}
               </div>
@@ -26,14 +27,25 @@
                 2
               </div>
             </button>
+            {{/xIf}}
             {{/each}}
           </div>
         </div>
       </div>
       <div class="flex flex-col flex-auto h-full p-6">
+      {{!-- {{#each users}}
+      {{#xIf ../currentUser '==' this._id}}
+      <!-- Placeholder Screen when no chat is selected -->
+      <div id="placeholderScreen" class="flex flex-col items-center justify-center h-full">
+        <div class="capitalize text-xl font-semibold mb-4">Welcome, {{this.username}}</div>
+        <div class="text-sm">Email: {{this.email}}</div>
+        <!-- Add any additional information or design elements here -->
+      </div>
+      {{/xIf}}
+      {{/each}} --}}
         <div class="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 h-full p-4">
           <div class="flex flex-col h-full overflow-x-auto mb-4">
-            <div class="flex flex-col h-full">
+            {{!-- <div class="flex flex-col h-full">
               <div class="grid grid-cols-12 gap-y-2">
                 <div class="col-start-1 col-end-8 p-3 rounded-lg">
                   <div class="flex flex-row items-center">
@@ -64,7 +76,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> --}}
           </div>
           <div
             class="flex flex-row items-center h-16 rounded-xl bg-white w-full px-4"

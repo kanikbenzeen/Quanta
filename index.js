@@ -56,6 +56,16 @@ app.use(session({
                 return options.inverse(this);
         }
     },
+    math: function(lvalue, operator, rvalue) {lvalue = parseFloat(lvalue);
+        rvalue = parseFloat(rvalue);
+        return {
+            "+": lvalue + rvalue,
+            "-": lvalue - rvalue,
+            "*": lvalue * rvalue,
+            "/": lvalue / rvalue,
+            "%": lvalue % rvalue
+        }[operator];
+    },
     trim: function(value, options) {
         return value.split(" ")
         .map(word => word[0].toUpperCase())
