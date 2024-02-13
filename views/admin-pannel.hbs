@@ -9,7 +9,7 @@
           <div class="flex flex-row items-center justify-between text-xs">
             <span class="font-bold">Active Conversations</span>
             <span
-              class="flex items-center justify-center bg-gray-300 h-4 w-4 rounded-full"
+              class="flex items-center justify-center bg-gray-300 h-4 w-6 rounded-full"
               >{{math users.length '-' 1}}</span
             >
           </div>
@@ -22,9 +22,9 @@
               </div>
               <div class="capitalize ml-2 text-sm font-semibold">{{this.username}}</div>
               <div
-                class="flex items-center justify-center ml-auto text-xs text-white bg-red-500 h-4 w-4 rounded leading-none"
+                class="flex items-center justify-center ml-auto text-xs text-white bg-red-500 h-2 w-2 rounded leading-none"
               >
-                2
+                
               </div>
             </button>
             {{/xIf}}
@@ -88,6 +88,24 @@
                   type="text"
                   class="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10"
                 />
+                <button
+                  class="absolute flex items-center justify-center h-full w-12 right-0 top-0 text-gray-400 hover:text-gray-600"
+                  id="emojiButton">
+                  <svg
+                    class="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    ></path>
+                  </svg>
+                </button>
               </div>
             </div>
             <div class="ml-4">

@@ -159,6 +159,31 @@ function sendMessage() {
 
 
 
+// Function to open the native emoji bar
+function openEmojiBar() {
+  // Create a contenteditable div
+  var div = document.createElement('div');
+  div.contentEditable = true;
+  div.style.position = 'absolute';
+  div.style.top = '-100px'; // Position it off-screen
+  document.body.appendChild(div);
+
+  // Focus the div
+  div.focus();
+
+  // Execute the command to open the emoji picker
+  document.execCommand('insertText', false, String.fromCharCode(0xD83D, 0xDE00)); // Insert a dummy emoji
+
+  // Remove the div from the DOM
+  document.body.removeChild(div);
+}
+
+// Event listener for the emoji button click
+document.getElementById('emojiButton').addEventListener('click', openEmojiBar);
+
+
+
+
 // Socket events
 // socket.on('new-user-joined', name => {
 //   appendNotification(`${name} joined the chat`);
