@@ -14,7 +14,7 @@ app.set('view engine', '.hbs');
 app.use(express.static(__dirname + '/public'));
 app.use(express.json());
 
-app.engine('.hbs', expressHbs.engine({ extname: '.hbs', defaultLayout: "main"}));
+// app.engine('.hbs', expressHbs.engine({ extname: '.hbs', defaultLayout: "main"}));
 
 
 app.use('/', router)
