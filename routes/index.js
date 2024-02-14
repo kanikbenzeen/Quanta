@@ -6,7 +6,7 @@ router.get('/', (req,res) =>{
     indexController.home(req,res)
 })
 
-router.post('/', (req,res) =>{
+router.post('/test', (req,res) =>{
     indexController.test(req,res)
 })
 
