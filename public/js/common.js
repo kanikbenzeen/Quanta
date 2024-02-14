@@ -100,9 +100,14 @@ function selectUser(selectedUserId, currentUserId, selectedUserName) {
               const messageContentDiv = document.createElement('div');
               messageContentDiv.classList.add('col-start-6', 'col-end-13', 'p-3', 'rounded-lg');
               messageContentDiv.innerHTML = `
-                  <div class="flex items-center justify-start flex-row-reverse">
-                      <div class="relative text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">${message.content}</div>
-                  </div>`;
+              <div class="col-start-6 col-end-13 p-3 rounded-lg relative">
+              <div class="flex items-center justify-start flex-row-reverse">
+                <div class="mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl relative">
+                  <div class="max-w-xs">${message.content}</div>
+                  <div class="absolute -top-3.5 right-0 text-xs text-gray-400 w-max -mt-1 mr-1">${message.timestamp}</div>
+                </div>
+              </div>
+            </div>`;
               
               // Append message content div to the message div
               messageDiv.appendChild(messageContentDiv);
@@ -111,10 +116,17 @@ function selectUser(selectedUserId, currentUserId, selectedUserName) {
               const messageContentDiv = document.createElement('div');
               messageContentDiv.classList.add('col-start-1', 'col-end-8', 'p-3', 'rounded-lg');
               messageContentDiv.innerHTML = `
-                  <div class="flex flex-row items-center">
-                      <div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">${selectedUserName}</div>
-                      <div class="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">${message.content}</div>
-                  </div>`;
+              <div class="col-start-1 col-end-8 p-3 rounded-lg relative">
+              <div class="flex flex-row items-center">
+                <div class="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">
+                ${selectedUserName}
+                </div>
+                <div class="ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl relative">
+                  <div class="max-w-xs">${message.content}</div>
+                  <div class="absolute -top-3.5 right-0 text-xs text-gray-400 w-max -mt-1 ">${selectedUserName} ${message.timestamp}</div>
+                </div>
+              </div>
+            </div>`;
               
               // Append message content div to the message div
               messageDiv.appendChild(messageContentDiv);
