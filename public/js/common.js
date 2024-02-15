@@ -172,7 +172,7 @@ function sendMessage() {
     // Check if currentUser and selectedUser are defined
     if (currentUser && selectedUser) {
         // Emit the message to the server, along with sender and recipient information
-        socket.emit('send', {
+        socket.emit('pushMessages', {
             sender: currentUser,
             recipient: selectedUser,
             content: message
