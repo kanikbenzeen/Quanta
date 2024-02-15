@@ -33,6 +33,10 @@ const adminLogin = async (req, res) =>{
     res.render('admin-login',{error})
 }
 
+const freeRoom = async (req, res) =>{
+    res.render('free-room', { layout: 'free-room' })
+}
+
 const error = async (req, res) =>{
     const errorMessage = req.query.message || 'An error occurred';
     res.render('error', { message: errorMessage });
@@ -50,6 +54,7 @@ module.exports = {
     user,
     admin,
     adminLogin,
+    freeRoom,
     error,
     notFound
 }

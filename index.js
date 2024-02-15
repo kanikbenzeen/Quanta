@@ -85,6 +85,34 @@ app.use('/form', forms)
 
 socketController(io)
 
+// Define an object to store active users
+const activeUsers = {};
+
+io.on('connection', socket => {
+    // Function to update active users list and emit to all clients
+    const updateActiveUsers = () => {
+        io.emit('active-users', Object.values(activeUsers));
+    };
+
+    socket.on('new-user-joined', name => {
+        activeUsers[socket.id] = name;
+        updateActiveUsers();
+        socket.broadcast.emit('user-joined', name, Object.values(activeUsers)); // Emit active users to all clients
+    });
+
+    socket.on('send', message => {
+        socket.broadcast.emit('receive', { message: message, name: activeUsers[socket.id] });
+    });
+
+    socket.on('disconnect', () => {
+        const name = activeUsers[socket.id];
+        delete activeUsers[socket.id];
+        updateActiveUsers();
+        socket.broadcast.emit('leave', name, Object.values(activeUsers)); // Emit active users to all clients
+    });
+});
+
+
 
 
 httpServer.listen(3000, () =>{

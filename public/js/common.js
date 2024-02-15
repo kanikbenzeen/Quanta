@@ -38,7 +38,7 @@ form.addEventListener('submit', (e) =>{
     messageInput.value =''
 })
 
-const name = prompt("Enter Your Name To Join");
+// const name = prompt("Enter Your Name To Join");
 
 
 

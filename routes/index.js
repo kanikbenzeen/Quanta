@@ -32,6 +32,10 @@ router.get('/error', (req,res) =>{
     indexController.error(req,res)
 })
 
+router.get('/free-room', (req,res) =>{
+    indexController.freeRoom(req,res)
+})
+
 router.get('*', function (req, res) {
     indexController.notFound(req, res);
 });
