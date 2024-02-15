@@ -6,7 +6,7 @@ socketController = async (io) => {
     console.log("i am connected")
     io.on('connection', socket => {
   
-        socket.on('send', async messageData => {
+        socket.on('pushMessages', async messageData => {
             console.log(messageData);
             try {
                 // Create a new message instance using the Message schema
