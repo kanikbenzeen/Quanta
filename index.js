@@ -2,7 +2,6 @@ const express = require("express")
 var expressHbs = require('express-handlebars');
 const index = require("./routes/index")
 const forms = require("./routes/forms")
-
 const app = express()
 const { createServer } = require("http");
 const { Server } = require("socket.io");

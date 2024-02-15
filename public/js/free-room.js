@@ -3,6 +3,39 @@ const form = document.getElementById("send-container");
 const messageInput = document.getElementById("messageInp");
 const messageContainer = document.getElementById("messages");
 
+
+// Request permission to display notifications when the DOM is loaded
+document.addEventListener("DOMContentLoaded", function () {
+    // Check if the browser supports notifications
+    if ("Notification" in window) {
+        Notification.requestPermission().then(function (permission) {
+            if (permission === "granted") {
+                console.log("Notification permission granted.");
+            }
+        });
+    } else {
+        console.error("This browser does not support notifications.");
+    }
+});
+
+// Function to send a notification
+function sendNotification(title, body, icon = "") {
+    if ("Notification" in window && Notification.permission === "granted") {
+        // Create a new notification
+        var notification = new Notification(title, {
+            body: body,
+            icon: icon,
+        });
+
+        // Handle click event on notification
+        notification.onclick = function () {
+            // Code to execute when notification is clicked
+            window.focus(); // Bring focus to the window
+            notification.close(); // Close the notification
+        };
+    }
+}
+
 // Function to append notifications to the message container
 const appendNotification = (message) => {
     const messageElement = document.createElement("span");
@@ -143,6 +176,7 @@ socket.on("leave", (name, activeUsers) => {
 socket.on("receive", (data) => {
     const name = data.name.charAt(0).toUpperCase() + data.name.slice(1); // Uppercase the name
     append(`${name}: ${data.message}`, "left");
+    sendNotification(name, data.message, "path/to/icon.png");
 });
 
 // Function to handle form submission for entering name
